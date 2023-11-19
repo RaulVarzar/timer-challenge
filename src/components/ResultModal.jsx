@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
-const ResultModal = forwardRef (function ResultModal({targetTime, timeRemaining, onReset, score}, ref){
+const ResultModal = forwardRef (function ResultModal({timeRemaining, onReset, score}, ref){
 
     const dialog = useRef()
 
@@ -18,14 +18,25 @@ const ResultModal = forwardRef (function ResultModal({targetTime, timeRemaining,
     })
 
     return createPortal( 
-        <dialog ref={dialog} className="result-modal" onClose={onReset}>
-            {userLost && <h2 className="lost">You lost</h2> }
-            {!userLost && <h2>Your score is: {score}</h2>}
-            <p>The target time was <strong>{targetTime} seconds</strong></p>
-            {!userLost && <p>You stopped the timer with <strong>{formattedRemainingTime} seconds left</strong></p>}
-            <form method="dialog" onSubmit={onReset}>
-                <button>Close</button>
-            </form>
+        <dialog ref={dialog}  onClose={onReset}  className="modal">
+            <div className="px-0 pb-0 text-center modal-box">
+                <div className="pt-4">
+                {userLost 
+                    ? <><h2 className="text-4xl text-error">You lost</h2> 
+                        <p className='pt-4 text-stone-400'>Click the button below to continue</p></>
+                    : <>
+                        <h2 className='text-2xl'>SCORE</h2>
+                        <p className='text-teal-400 text-7xl'>{score}</p>
+                        <h2 className='text-stone-600'>You stopped the timer with <span className='text-teal-600'>{formattedRemainingTime}</span> seconds left</h2>
+                      </>
+                }
+                </div>
+                <div className="w-full modal-action">
+                    <form className='w-full' method="dialog" onSubmit={onReset}>
+                        <button className='rounded-t-none btn btn-block'>close</button>
+                    </form>
+                </div>
+            </div>
         </dialog>,
         document.getElementById('modal')
     );

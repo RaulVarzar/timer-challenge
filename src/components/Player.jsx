@@ -11,35 +11,49 @@ export default function Player({playerName, handleNameChange}) {
     setInputData(value)
   }
 
-  function handleNewName(inputData){
+  function handleOnEnter (e){
+    if (inputData && e.key === 'Enter'){
     handleNameChange(inputData)
-    setshowInputField(false)
+    setshowInputField(false)}
+  }
+
+  function handleNewName (){
+    if (inputData)  {
+      handleNameChange(inputData)
+      setshowInputField(false)
+    }
   }
 
   return (
     <>
-      <section className="h-24 mx-auto text-center">
+      <section className="h-16 mx-auto text-center">
         {playerName && !showInputField ?
-          <div className="animate-fade-up animate-duration-100">
-            <h2 className="inline mx-4 text-xl text-gray-600">Good luck, {playerName}!</h2>
-            <button className="inline text-stone-500 btn btn-xs hover:text-stone-700" onClick={onShowInput}>change name</button>
-            </div> 
+          <div className="cursor-pointer animate-fade-up animate-duration-100 " onClick={onShowInput}>
+            <h2 className="inline mx-4 text-xl text-gray-500">Good luck, <span className="text-teal-400">{playerName}</span>!</h2>
+            
+            <button className="inline text-stone-500 btn btn-xs hover:text-stone-700">change name</button>
+          </div> 
           : ' '
         }
         
         { showInputField || !playerName ? 
             <div className="join animate-fade-down animate-duration-100">
                 <input 
+                value={inputData}
                   autoFocus
                   type="text" 
                   placeholder="Enter your name" 
-                  className="w-full max-w-xs input input-bordered join-item" 
+                  className="w-full max-w-xs input join-item bg-base-200" 
                   onChange={(event) => handleInputChange(event.target.value)}
+                  onKeyDown={handleOnEnter}
                 />
                 <button 
-                  className="btn btn-secondary join-item" 
+                  className="bg-teal-400 btn join-item" 
                   onClick={() => handleNewName(inputData)}>
-                    Set Name
+                    {inputData 
+                      ? <i className="px-2 fa-solid fa-check fa-lg"></i>
+                      : <i className="px-2 fa-solid fa-xmark fa-lg"></i>
+                    }
                 </button>
             </div> : null }
 
