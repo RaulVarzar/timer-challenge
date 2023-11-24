@@ -13,7 +13,7 @@ export default function Results ({results, onClear, playerName}) {
     return(
         <>
         
-            <div className='mb-10 animate-fade-up animate-duration-300 animate-delay-[400ms]'>
+            <div className='px-4 mb-10 animate-fade-up animate-duration-300 animate-delay-[400ms]'>
                 
             <div className="flex content-center justify-between">
                 <h2 className="text-4xl font-bold text-neutral-content">RESULTS</h2>
@@ -30,21 +30,21 @@ export default function Results ({results, onClear, playerName}) {
 
             <table className="table font-extralight">
                 
-                <thead className="text-center">
+                <thead className="">
                 <tr>
                     <th>Name</th>
-                    <th>Score</th>
-                    <th>Difficulty</th>
+                    <th className="text-center">Score</th>
+                    <th className="text-right">Difficulty</th>
                 </tr>
                 </thead>
-                <tbody className="text-center"> 
+                <tbody> 
                 
                 {showAll ? 
                     results.map( (result) => 
                             <tr className={(result.score === highestScore ? 'bg-base-100 text-accent ' : '') + "animate-duration-150 animate-fade-down animate-delay-150"} key={result.id}>    
                                 <th className="font-bold">{result.player}</th>
-                                <td>{result.score}</td>
-                                <td>{result.difficulty}</td>
+                                <td  className="text-center">{result.score}</td>
+                                <td  className="text-right">{result.difficulty}</td>
                             </tr>
                     )
                     : 

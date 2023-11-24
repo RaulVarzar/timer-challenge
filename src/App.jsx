@@ -58,7 +58,7 @@ function App() {
 
       <Player playerName={playerName} handleNameChange={handleNameChange}/>
 
-        <div className="grid items-center justify-around gap-6 mt-0 md:pt-8 md:mx-10 lg:mx-24 md:gap-4 lg:gap-8 xl:gap-12 md:grid-cols-2 xl:grid-cols-4 md:p-4 xl:p-5">
+        <div className="grid items-center justify-around gap-6 mt-0 max-w-7xl md:pt-8 md:mx-10 lg:mx-24 xl:mx-auto md:gap-4 lg:gap-8 md:grid-cols-2 xl:grid-cols-4 md:p-4 xl:p-5">
           <TimerChallenge targetTime={1} title={"beginner"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
           <TimerChallenge targetTime={3} title={"easy"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
           <TimerChallenge targetTime={5} title={"medium"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>

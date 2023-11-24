@@ -38,8 +38,8 @@ export default function TimerChallenge({title, targetTime, submitResult, nameIsE
         
     }
 
-    const inactive = 'md:min-h-[180px] content-center w-80 sm:w-96 md:w-auto group pt-4 md:pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-7 hover:elevation-0 bg-purple-400 hover:bg-purple-500 animate-fade-up animate-duration-300 animate-delay-0 animate-once'
-    const active = 'md:min-h-[180px] content-center w-80 sm:w-96 md:w-auto group pt-4 md:pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-7 hover:elevation-0 bg-cyan-500 animate-once'
+    const inactive = 'content-center w-80 sm:w-96 md:w-auto group pt-4 md:pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-7 hover:elevation-0 bg-purple-400 hover:bg-purple-500 animate-fade-up animate-duration-300 animate-delay-0 animate-once'
+    const active = 'content-center md:min-h-[200px] content-center w-80 sm:w-96 md:w-auto group pt-4 md:pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-7 hover:elevation-0 bg-cyan-500 animate-once'
 
     return (
         <>
@@ -51,14 +51,14 @@ export default function TimerChallenge({title, targetTime, submitResult, nameIsE
                 score = {score}
             />
            
-            <div 
+            <div
                 onClick={timerActive ? () => handleStop() : handleStart} 
                 className={timerActive ? active : inactive}
                 >
             
                 <h1 className="text-2xl font-bold leading-none text-white uppercase md:text-4xl">{!timerActive ? title : 'RUNNING...' }</h1> 
 
-                <p className={"mb-2 text-lg text-teal-200 transition duration-150 md:mb-6 group-hover:text-info" + (timerActive? " hidden" :'')}>
+                <p className={"mb-2 text-lg text-teal-200 transition duration-150 md:mb-6 group-hover:text-info" + (timerActive? " opacity-0" :'')}>
                     {targetTime} second{targetTime > 1? 's': ''}
                 </p> 
                 <div className="p-0 m-0 md:divider"></div>
