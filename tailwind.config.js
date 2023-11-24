@@ -7,6 +7,11 @@ module.exports = {
     extend: {
       fontFamily: {
         'roboto-mono': ['"Kdam Thmor Pro"', 'cursive']
+      },
+      scale: {
+        '101': '1.01',
+        '103': '1.03',
+        '98': '0.98'
       }
     }
   },

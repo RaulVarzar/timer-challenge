@@ -17,8 +17,11 @@ export default function TimerChallenge({title, targetTime, submitResult, nameIsE
         dialog.current.open()
     }
 
-    function handleReset () {
+    function handleReset (score, targetTime) {
         setTimeRemaining(targetTime * 1000)
+        if(timeRemaining>0){
+            submitResult(score, targetTime)
+        }
     }
 
     function handleStart() {
@@ -29,14 +32,14 @@ export default function TimerChallenge({title, targetTime, submitResult, nameIsE
         } 
     }
 
-    function handleStop(score, targetTime) { // executes if you stop the timer in time
+    function handleStop() { // executes if you stop the timer in time
         dialog.current.open()
         clearInterval(timer.current)
-        submitResult(score, targetTime)
+        
     }
 
-    const inactive = 'w-80 sm:w-96 md:w-auto group pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-6 hover:elevation-2 bg-accent hover:bg-[#e99258] animate-fade-up animate-duration-300'
-    const active = 'w-80 sm:w-96 md:w-auto group pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-6 hover:elevation-2 bg-secondary animate-fade-up animate-duration-300'
+    const inactive = 'md:min-h-[180px] content-center w-80 sm:w-96 md:w-auto group pt-4 md:pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-7 hover:elevation-0 bg-purple-400 hover:bg-purple-500 animate-fade-up animate-duration-300 animate-delay-0 animate-once'
+    const active = 'md:min-h-[180px] content-center w-80 sm:w-96 md:w-auto group pt-4 md:pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-7 hover:elevation-0 bg-cyan-500 animate-once'
 
     return (
         <>
@@ -44,23 +47,23 @@ export default function TimerChallenge({title, targetTime, submitResult, nameIsE
                 ref={dialog} 
                 targetTime={targetTime} 
                 timeRemaining={timeRemaining} 
-                onReset = {handleReset}
+                onReset = {() => handleReset(score, targetTime)}
                 score = {score}
             />
            
             <div 
-                onClick={timerActive ? () => handleStop(score, targetTime) : handleStart} 
+                onClick={timerActive ? () => handleStop() : handleStart} 
                 className={timerActive ? active : inactive}
                 >
             
-                <h1 className="text-4xl font-bold leading-none text-white uppercase">{!timerActive ? title : 'RUNNING...' }</h1> 
+                <h1 className="text-2xl font-bold leading-none text-white uppercase md:text-4xl">{!timerActive ? title : 'RUNNING...' }</h1> 
 
-                <p className="mb-2 text-lg md:mb-6 text-neutral-content">
+                <p className={"mb-2 text-lg text-teal-200 transition duration-150 md:mb-6 group-hover:text-info" + (timerActive? " hidden" :'')}>
                     {targetTime} second{targetTime > 1? 's': ''}
                 </p> 
-                <div className="p-0 m-0 divider"></div>
+                <div className="p-0 m-0 md:divider"></div>
                 {!nameIsEmpty ? 
-                <h2 className="transition duration-200 text-stone-200">Click to {timerActive ? 'stop' : 'start'} timer</h2> 
+                <h2 className="transition duration-200 text-stone-300 group-hover:text-white">Click to {timerActive ? 'stop' : 'start'} timer</h2> 
                     : 
                 <h2 className="transition duration-200 opacity-25 group-hover:opacity-80 text-accent-content">You need to set your name first</h2>
                 }
