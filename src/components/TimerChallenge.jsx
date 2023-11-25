@@ -38,8 +38,8 @@ export default function TimerChallenge({title, targetTime, submitResult, nameIsE
         
     }
 
-    const inactive = 'content-center w-80 sm:w-96 md:w-auto group pt-4 md:pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-7 hover:elevation-0 bg-purple-400 hover:bg-purple-500 animate-fade-up animate-duration-300 animate-delay-0 animate-once'
-    const active = 'content-center md:min-h-[200px] content-center w-80 sm:w-96 md:w-auto group pt-4 md:pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-7 hover:elevation-0 bg-cyan-500 animate-once'
+    const inactive = 'w-80 sm:w-96 md:w-auto group pt-4 md:pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-7 hover:elevation-0 bg-purple-400 hover:bg-purple-500 animate-fade-up animate-duration-300 animate-delay-0 animate-once'
+    const active = 'content-center w-80 sm:w-96 md:w-auto group pt-4 md:pt-8 pb-2 px-4 text-center overflow-hidden transition duration-200 ease-in-out rounded-lg cursor-pointer group elevation-7 hover:elevation-0 bg-cyan-500 animate-once'
 
     return (
         <>

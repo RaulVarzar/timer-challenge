@@ -43,8 +43,8 @@ export default function Results ({results, onClear, playerName}) {
                     results.map( (result) => 
                             <tr className={(result.score === highestScore ? 'bg-base-100 text-accent ' : '') + "animate-duration-150 animate-fade-down animate-delay-150"} key={result.id}>    
                                 <th className="font-bold">{result.player}</th>
-                                <td  className="text-center">{result.score}</td>
-                                <td  className="text-right">{result.difficulty}</td>
+                                <td className="text-center">{result.score}</td>
+                                <td className="text-right">{result.difficulty}</td>
                             </tr>
                     )
                     : 
@@ -53,12 +53,13 @@ export default function Results ({results, onClear, playerName}) {
                             return   (
                                 <tr className={(result.score === highestScore ? 'bg-base-100 text-accent ' : '') + "animate-duration-150 animate-fade-down animate-delay-150"} key={result.id}>    
                                     <th className="font-bold">{result.player}</th>
-                                    <td>{result.score}</td>
-                                    <td>{result.difficulty}</td>
+                                    <td className="text-center">{result.score}</td>
+                                    <td className="text-right">{result.difficulty}</td>
                                 </tr>
                             ) 
                         })
                 }
+                
                 
                 </tbody>
             </table>

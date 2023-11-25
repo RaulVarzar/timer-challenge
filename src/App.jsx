@@ -51,9 +51,9 @@ function App() {
   return (
     <> 
     <section className="content-center min-h-screen">
-      <header className='p-8 mx-auto text-center animate-fade animate-duration-500 animate-delay-300'>
+      <header className='p-3 mx-auto text-center md:p-8 animate-fade animate-duration-500 animate-delay-300'>
           <h1 className='text-2xl font-bold sm:text-4xl lg:text-6xl text-neutral-content'>THE FINAL COUNTDOWN</h1>
-          <p className='font-light lg:text-xl text-stone-400 opacity-70'>Stop the timer once you estimate that time is (almost) up</p>
+          <p className='text-sm font-light tracking-tighter lg:text-xl text-stone-400 opacity-70'>Stop the timer once you estimate that time is (almost) up</p>
       </header>
 
       <Player playerName={playerName} handleNameChange={handleNameChange}/>

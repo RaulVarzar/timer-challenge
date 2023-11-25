@@ -29,10 +29,10 @@ export default function Player({playerName, handleNameChange}) {
 
   return (
     <>
-      <section className="h-16 mx-auto text-center">
+      <section className="h-12 mx-auto mt-2 text-center md:h-16">
         {playerName && !showInputField ?
           <div className="cursor-pointer animate-fade-down animate-duration-150 animate-delay-500 " onClick={onShowInput}>
-            <h2 className="inline mx-4 text-xl text-gray-400">Good luck, <span className="text-info">{playerName}</span>!</h2>
+            <h2 className="inline mx-4 text-gray-400 align-middle md:text-xl text-md">Good luck, <span className="text-info">{playerName}</span>!</h2>
             
             <button className="inline text-stone-500 btn btn-xs hover:text-stone-700">change name</button>
           </div> 
@@ -46,13 +46,12 @@ export default function Player({playerName, handleNameChange}) {
                   autoFocus
                   type="text" 
                   placeholder="Enter your name" 
-                  className="w-full max-w-xs text-center input join-item bg-base-200" 
+                  className="w-full h-8 max-w-xs text-center md:h-12 input join-item bg-base-200" 
                   onChange={(event) => handleInputChange(event.target.value)}
                   onKeyDown={handleOnEnter}
                 />
                 <button 
-                  // className={`bg-info btn join-item` +}
-                  className={inputData ? "bg-info btn join-item" : "bg-error btn join-item"}
+                  className={inputData ? "bg-info btn join-item btn-sm md:btn-md" : "bg-error btn join-item btn-sm md:btn-md"}
                   onClick={inputData? () => handleNewName(inputData) : onHideInput}>
                     {inputData 
                       ? <i className="px-2 fa-solid fa-check fa-lg text-stone-500"></i>
