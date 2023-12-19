@@ -1,16 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, LayoutGroup } from "framer-motion";
 
 import Player from './components/Player.jsx';
 import TimerChallenge from "./components/TimerChallenge";
 import Results from "./components/Results.jsx"
+import Results2 from './components/Results.jsx';
 
 
 function App() {
   const storedResults = JSON.parse(localStorage.getItem('storedResults')) || [];
   const storedName = JSON.parse(localStorage.getItem('storedName')) || '';
 
-  const difficultyTable = {1:"BEGINNER", 3:"EASY", 5:"MEDIUM", 10:"HARD"}
-  
+  const difficultyTable = {
+    "beginner": 1, 
+    "easy": 3, 
+    "medium": 5, 
+    "hard": 10
+}
+
   const [results, setResults] = useState(storedResults)
 
   const [playerName, setPlayerName] = useState(storedName)
@@ -22,15 +29,14 @@ function App() {
       JSON.stringify(newName.toUpperCase()));
   }
 
-  function submitResult(score, targetTime){
+  function submitResult(score, title){
       const resultId = Math.random()
       const newResult = {
         id: resultId,
         player: playerName,
         score: score,
-        difficulty: difficultyTable[targetTime]
+        difficulty: title
       }
-      const storedResults = JSON.parse(localStorage.getItem('storedResults')) || [];
       localStorage.setItem(
         'storedResults', 
         JSON.stringify([newResult, ...storedResults]));
@@ -47,32 +53,28 @@ function App() {
       setResults([]);
   }
 
-
   return (
-    <> 
-    <section className="content-center min-h-screen">
-      <header className='p-3 mx-auto text-center md:p-8 animate-fade animate-duration-500 animate-delay-300'>
+    <main className="flex flex-col min-h-screen pb-16 overflow-auto bg-base-300"> 
+    
+      <div className=' grow-0'>
+        <header className='p-3 mx-auto text-center md:p-8 animate-fade h-fit animate-duration-500 animate-delay-300'>
           <h1 className='text-2xl font-bold sm:text-4xl lg:text-6xl text-neutral-content'>THE FINAL COUNTDOWN</h1>
           <p className='text-sm font-light tracking-tighter lg:text-xl text-stone-400 opacity-70'>Stop the timer once you estimate that time is (almost) up</p>
-      </header>
+        </header>
+          <Player playerName={playerName} handleNameChange={handleNameChange}/> 
+      </div>
 
-      <Player playerName={playerName} handleNameChange={handleNameChange}/>
-
-        <div className="grid items-center justify-around gap-6 mt-0 max-w-7xl md:pt-8 md:mx-10 lg:mx-24 xl:mx-auto md:gap-4 lg:gap-8 md:grid-cols-2 xl:grid-cols-4 md:p-4 xl:p-5">
-          <TimerChallenge targetTime={1} title={"beginner"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
-          <TimerChallenge targetTime={3} title={"easy"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
-          <TimerChallenge targetTime={5} title={"medium"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
-          <TimerChallenge targetTime={10} title={"hard"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
+      <div className="flex items-start pt-[10vh] grow">
+        <div className="grid items-center justify-around grid-cols-2 gap-2 px-2 mt-0 max-w-7xl md:pt-8 md:mx-10 lg:mx-24 xl:mx-auto md:gap-4 lg:gap-8 xl:grid-cols-4 md:p-4 xl:p-5">
+          <TimerChallenge targetTime={difficultyTable.beginner} title={"beginner"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
+          <TimerChallenge targetTime={difficultyTable.easy} title={"easy"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
+          <TimerChallenge targetTime={difficultyTable.medium} title={"medium"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
+          <TimerChallenge targetTime={difficultyTable.hard} title={"hard"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
         </div>
-      
-        <div className="flex mx-auto ">
-        <div className="mx-auto mt-6 text-center w-96">
-        {results.length > 0 ? <Results results={results} playerName={playerName} onClear={clearResults}/> :'' }
-        </div>
-        </div>
+      </div>
         
-    </section>
-    </>
+        <Results2 results={results} playerName={playerName} onClear={clearResults}/>
+    </main>
   );
 }
 

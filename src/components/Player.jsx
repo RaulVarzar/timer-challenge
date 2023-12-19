@@ -6,7 +6,7 @@ export default function Player({playerName, handleNameChange}) {
   const onShowInput = () => setshowInputField(true)
   const onHideInput = () => setshowInputField(false)
 
-  const [inputData, setInputData] = useState('')
+  const [inputData, setInputData] = useState(playerName)
 
   function handleInputChange(value){
     if (value.length <= 10)
@@ -21,9 +21,8 @@ export default function Player({playerName, handleNameChange}) {
 
   function handleNewName (){
     if (inputData)  {
-      handleNameChange(inputData)
+      handleNameChange(inputData.toUpperCase())
       setshowInputField(false)
-      setInputData('')
     }
   }
 
@@ -51,8 +50,8 @@ export default function Player({playerName, handleNameChange}) {
                   onKeyDown={handleOnEnter}
                 />
                 <button 
-                  className={inputData ? "bg-info btn join-item btn-sm md:btn-md" : "bg-error btn join-item btn-sm md:btn-md"}
-                  onClick={inputData? () => handleNewName(inputData) : onHideInput}>
+                  className={inputData ? "btn-primary btn join-item btn-sm md:btn-md " : " btn join-item btn-sm md:btn-md btn-disaled btn-error"}
+                  onClick={inputData ? () => handleNewName(inputData) : onHideInput}>
                     {inputData 
                       ? <i className="px-2 fa-solid fa-check fa-lg text-stone-500"></i>
                       : <i className="px-2 text-info-content fa-solid fa-xmark fa-lg"></i>

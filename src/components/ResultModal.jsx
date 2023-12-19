@@ -17,7 +17,6 @@ const ResultModal = forwardRef (function ResultModal({timeRemaining, onReset, sc
         }
     })
 
-
     return createPortal( 
         <dialog ref={dialog} className="modal" >
             <div className="px-0 pb-0 text-center modal-box hover:scale-101">
