@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {motion} from "framer-motion"
 
 export default function Player({playerName, handleNameChange}) {
 
@@ -28,7 +29,12 @@ export default function Player({playerName, handleNameChange}) {
 
   return (
     <>
-      <section className="h-12 mx-auto mt-2 text-center md:h-16">
+      <motion.section
+        initial={{y:"-100%", opacity:0}}
+        animate={{y:0, opacity:1}}
+        transition={{ delay:0.4, duration:0.3}} 
+        className="h-12 mx-auto mt-2 text-center md:h-16"
+      >
         {playerName && !showInputField ?
           <div className="cursor-pointer animate-fade-down animate-duration-150 animate-delay-500 " onClick={onShowInput}>
             <h2 className="inline mx-4 text-gray-400 align-middle md:text-xl text-md">Good luck, <span className="text-info">{playerName}</span>!</h2>
@@ -61,7 +67,7 @@ export default function Player({playerName, handleNameChange}) {
 
           
         
-      </section>
+      </motion.section>
     </>
   );
 }

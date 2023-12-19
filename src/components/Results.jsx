@@ -33,15 +33,15 @@ export default function Results2({results, playerName, onClear}){
         
         <motion.div
         layout
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{ opacity: 0, y:"100%" }}
+        animate={{ opacity: 1, y:0, transition:{duration:0.4} }}
         transition={{
           layout: {
             duration: 0.4,
             type: "spring",
           },
         }}
-        className="absolute bottom-0 left-0 right-0 flex flex-col justify-center w-full max-w-2xl pb-4 m-auto mx-auto overflow-auto rounded-b-none max-h-[80vh] bg-base-100 rounded-xl"
+        className="absolute bottom-0 left-0 right-0 flex flex-col justify-center w-full max-w-2xl pt-2 pb-4 m-auto mx-auto overflow-auto rounded-b-none max-h-[80vh] bg-base-100 rounded-xl"
       >
         {results.length > 0 && !isOpen &&
         <motion.button 
@@ -52,7 +52,7 @@ export default function Results2({results, playerName, onClear}){
         </motion.button>
         }
         <motion.h2 
-          layout="position" 
+          layout
           className={"relative top-0 w-full pb-4 text-3xl font-bold text-center bg-base-100 text-neutral-content " + (isOpen && " pt-4")}
         >
           RESULTS

@@ -5,6 +5,7 @@ import Player from './components/Player.jsx';
 import TimerChallenge from "./components/TimerChallenge";
 import Results from "./components/Results.jsx"
 import Results2 from './components/Results.jsx';
+import Header from './components/Header.jsx';
 
 
 function App() {
@@ -55,25 +56,34 @@ function App() {
 
   return (
     <main className="flex flex-col min-h-screen pb-16 overflow-auto bg-base-300"> 
-    
-      <div className=' grow-0'>
-        <header className='p-3 mx-auto text-center md:p-8 animate-fade h-fit animate-duration-500 animate-delay-300'>
-          <h1 className='text-2xl font-bold sm:text-4xl lg:text-6xl text-neutral-content'>THE FINAL COUNTDOWN</h1>
-          <p className='text-sm font-light tracking-tighter lg:text-xl text-stone-400 opacity-70'>Stop the timer once you estimate that time is (almost) up</p>
-        </header>
+          <Header />
           <Player playerName={playerName} handleNameChange={handleNameChange}/> 
-      </div>
+          
+      <div className="flex flex-col items-start justify-center grow-0 py-[10vh]">
 
-      <div className="flex items-start pt-[10vh] grow">
-        <div className="grid items-center justify-around grid-cols-2 gap-2 px-2 mt-0 max-w-7xl md:pt-8 md:mx-10 lg:mx-24 xl:mx-auto md:gap-4 lg:gap-8 xl:grid-cols-4 md:p-4 xl:p-5">
+      {!playerName && 
+        <motion.h3 
+          className='px-6 py-4 mx-auto mb-4 font-bold lg:text-2xl rounded-2xl text-primary bg-base-100'
+          initial={{y:"-100%", opacity:0}}
+          animate={{y:0, opacity:1}}
+          transition={{ delay:0.5, duration:0.3}}
+        >
+            ENTER YOUR NAME TO START PLAYING
+        </motion.h3>
+      }
+
+        <div className={"grid items-center content-center grid-cols-2 gap-2 px-2 mt-0 max-w-7xl md:pt-8 md:mx-10 lg:mx-24 xl:mx-auto md:gap-4 lg:gap-8 md:grid-cols-2 lg:grid-cols-4 md:p-4 xl:p-5 " + (!playerName && " opacity-30")}>
           <TimerChallenge targetTime={difficultyTable.beginner} title={"beginner"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
           <TimerChallenge targetTime={difficultyTable.easy} title={"easy"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
           <TimerChallenge targetTime={difficultyTable.medium} title={"medium"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
           <TimerChallenge targetTime={difficultyTable.hard} title={"hard"} submitResult={submitResult} nameIsEmpty={nameIsEmpty(playerName)}/>
         </div>
       </div>
-        
+      
+      {playerName &&
         <Results2 results={results} playerName={playerName} onClear={clearResults}/>
+      }
+      
     </main>
   );
 }
